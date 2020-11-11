@@ -5,6 +5,8 @@ import moment from 'moment'
 import { NavLink } from 'react-router-dom'
 
 export default function ChiTietPhim(props) {
+
+    //useSelector lấy chi tiết phim trên reduxHook về
     const chiTietPhim = useSelector(state => state.QuanLyPhimReducer.chiTietPhim)
 
     console.log("88888888888888888888888888888888888888888")
@@ -48,9 +50,11 @@ export default function ChiTietPhim(props) {
                     <div className="row">
                         <div className="nav flex-column nav-pills col-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
+    {/* dấu "?" là kiểu đợi chạy xong khi nào trong chi tiết phim có hệ thống rạp chiếu mới chạy map( chứ ko lỗi) */}
                             {chiTietPhim.heThongRapChieu?.map((heThongRap, i) => {
 
-                                //cái dầu tiên bấm ko ra nên làm cái active này
+                                //có lưu ý là cái cụm rạp dầu tiên bấm ko ra nên làm cái active này
+                                //bằng cách cái className="nav-link" phải đổi thành className={'nav-link' + active}
                                 let active = i === 0 ? 'active' : ''
 
                                 return <a key={i} className={'nav-link' + active} id="v-pills-home-tab" data-toggle="pill" href={`#${heThongRap.maHeThongRap}`} role="tab" aria-controls="v-pills-home" aria-selected="true"><img src={heThongRap.logo} style={{ width: 50, height: 50 }} />{heThongRap.tenHeThongRap}</a>
